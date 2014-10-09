@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Elgentos_Bundlequick>
+            <version>0.1.1</version>
+        </Elgentos_Bundlequick>
+    </modules>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Elgentos_Bundlequick>
+                    <files>
+                        <default>Elgentos_Bundlequick.csv</default>
+                    </files>
+                </Elgentos_Bundlequick>
+            </modules>
+        </translate>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <bundlequick translate="title" module="bundlequick">
+                                            <title>Bundlequick</title>
+                                        </bundlequick>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <bundlequick>
+                        <type>singleton</type>
+                        <class>Elgentos_Bundlequick_Model_Observer</class>
+                        <method>addMassactionToProductGrid</method>
+                    </bundlequick>
+                </observers>
+            </adminhtml_block_html_before>
+        </events>
+    </adminhtml>
+
+    <frontend>
+        <events>
+            <cms_page_render>
+                <observers>
+                    <bundlequick>
+                        <type>singleton</type>
+                        <class>Elgentos_Bundlequick_Model_Header</class>
+                        <method>add</method>
+                    </bundlequick>
+                </observers>
+            </cms_page_render>
+        </events>
+    </frontend>
+
+    <global>
+        <blocks>
+            <bundlequick>
+                <class>Elgentos_Bundlequick_Block</class>
+            </bundlequick>
+        </blocks>
+        <models>
+            <bundlequick>
+                <class>Elgentos_Bundlequick_Model</class>
+            </bundlequick>
+        </models>
+        <helpers>
+            <bundlequick>
+                <class>Elgentos_Bundlequick_Helper</class>
+            </bundlequick>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Elgentos_Bundlequick before="Mage_Adminhtml">Elgentos_Bundlequick_Adminhtml</Elgentos_Bundlequick>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <default>
+        <bundlequick>
+            <general>
+                <disabled>0</disabled>
+                <defaultdiscount>10</defaultdiscount>
+                <cats>1</cats>
+                <related>1</related>
+            </general>
+        </bundlequick>
+    </default>
+</config>
